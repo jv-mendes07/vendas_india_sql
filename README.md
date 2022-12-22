@@ -66,6 +66,44 @@ SELECT COUNT(*) AS 'qtd_rows' FROM transactions;
 
 Normalmente, a tabela-fato contêm mais linhas do que a tabela-dimensão, nesse caso, por exemplo, a tabela-fato transactions contêm 148 mil linhas, enquanto às de mais tabelas-dimensões contêm pouquíssimas linhas armazenadas.
 
+Após essa verificação breve da extensão do conjunto de dados, o processo de análise foi devidamente inicializado:
+
+#### (1) Qual foi a receital total faturada pela empresa?
+
+Antes de escrever a query que trouxesse a resposta para a pergunta acima, decidi saber os anos em que essa empresa já está ativa no mercado:
+
+```
+# Anos em que a empresa está ativa:
+
+SELECT DISTINCT(d.year) FROM date AS d;
+```
+
+A query acima retornou 2017, 2018, 2019 e 2020 como os anos respectivos em que a empresa está ativa no mercado indiano.
+
+Após isto, escrevi a query para saber a receita total faturada pela empresa desde 2017 até 2020:
+
+```
+# Receita total da empresa faturada desde 2017 até 2020:
+
+SELECT SUM(t.sales_amount) AS 'revenue' FROM transactions AS t;
+```
+
+A query acima retornou 984 milhões de rupees (moeda indiana) faturada pela empresa durante esse período, que convertido para o dólar americano seria aproximadamente 11 milhões de dólares faturado pela empresa indiana.
+
+#### (2) Qual foi a média de faturamento da empresa por venda?
+
+Tal pergunta é complementar à pergunta anterior, e para responder rapidamente tal questão, escrevi a query abaixo:
+
+```
+# (2) Qual é a média de faturamento da empresa?
+
+SELECT ROUND(AVG(t.sales_amount), 2) AS 'avg_revenue' FROM transactions AS t;
+```
+A query acima retornou uma média de 6 mil rupees faturadas por cada venda pela empresa indiana durante esse período de quatro anos (2017-2020), que convertido para o dólar seria 79 dólares em média faturados pela empresa em cada venda.
+
+
+
+
 
 
 
