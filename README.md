@@ -162,10 +162,55 @@ Com a query acima, obtive essa tabela abaixo:
 
 Visivelmente, Janeiro foi o mês de maior faturamento da empresa de aproximadamente 99 milhões de rupees (1 milhão de dólares), enquanto Setembro foi o mês de menor faturamento de 54 milhões de rupees (662 mil dólares), é constatado que os primeiros meses do ano (de Janeiro até Maio) são os meses de maior faturamento da empresa, enquanto da metade do ano em diante, isto é, de Junho até Outubro a empresa apresenta uma queda de faturamento mensal.
 
+Mesmo que o faturamento seja uma informação importante da empresa, é imprescindível saber informações sobre a lucratividade e a margem de lucro que a empresa obteve durante esse período de tempo:
 
+#### (5) Quais foram os anos de maior lucratividade da empresa?
 
+Query escrita para responder a questão acima:
 
+```
+SELECT d.year, ROUND((SUM(t.sales_amount) - SUM(t.cost_price)), 2) AS 'profit' FROM 
+transactions AS t INNER JOIN date AS d
+ON t.order_date = d.date
+GROUP BY d.year
+ORDER BY profit DESC;
+```
+Tabela com os lucros monetários da empresa divididos por ano:
 
+| year |   profit    |
+|------|-------------|
+| 2019 | 10486543.89 |
+| 2018 | 9337296.15  |
+| 2017 | 2717568.03  |
+| 2020 | 2060160.34  |
+
+Interessantemente, 2018 foi o ano de maior faturamento, porém 2019 foi o ano de maior lucratividade da empresa, enquanto em contrapartida 2017 foi o ano de menor faturamento, mas 2020 que foi ano que a empresa obteve menos lucros em seus investimentos.
+
+Com a tabela acima, é notável que a empresa apresentava um aumento contínuo de seus lucros de 2017 até 2019, porém em 2020 a empresa obteve uma queda drástica nos retornos lucrativos de seus investimentos.
+
+Entretanto, para continuar nesse tópico relativo aos lucros da empresa, decidi saber qual foi a porcentagem de lucro relativo ao faturamento total da empresa em cada ano:
+
+#### (6) Qual foi a margem de lucro da empresa por ano?
+
+Query escrita para responder tal pergunta:
+
+```
+SELECT d.year, ROUND((SUM(t.profit_margin) / SUM(t.sales_amount)) * 100, 2) AS 'margin_profit' FROM
+transactions AS t INNER JOIN date AS d
+ON d.date = t.order_date
+GROUP BY d.year
+ORDER BY margin_profit DESC;
+```
+Abaixo obtive a tabela com a margem de lucro da empresa em cada ano:
+
+| year | margin_profit|
+|------|--------------|
+| 2019 |    3.12      |
+| 2017 |    2.99      |
+| 2018 |    2.26      |
+| 2020 |    1.45      |
+
+Como esperado, 2019 foi o ano de maior lucratividade e também foi o ano em que a empresa indiana obteve a maior margem de lucro relativo à seus investimentos (de 3 %), enquanto 2020 que foi o ano de menor lucratividade, também foi o ano em que a empresa obteve a menor proporção de lucro em relação ao faturamento total obtido no ano (de 1 %).
 
 
 
