@@ -212,5 +212,27 @@ Abaixo obtive a tabela com a margem de lucro da empresa em cada ano:
 
 Como esperado, 2019 foi o ano de maior lucratividade e também foi o ano em que a empresa indiana obteve a maior margem de lucro relativo à seus investimentos (de 3 %), enquanto 2020 que foi o ano de menor lucratividade, também foi o ano em que a empresa obteve a menor proporção de lucro em relação ao faturamento total obtido no ano (de 1 %).
 
+Porém, qual foi o custo de produção da empresa em cada ano? Será que os anos mais lucrativos foram os anos mais custosos para a empresa? Ou será que inversamente, os anos menos lucrativos foram os mais custosos? 
 
+#### (7) Qual foi o custo de produção da empresa por ano?
+
+Query escrita em SQL para responder tal pergunta:
+
+```
+SELECT d.year, ROUND(SUM(t.cost_price), 2) AS 'cost' FROM transactions AS t
+INNER JOIN date AS d
+ON d.date = t.order_date
+GROUP BY d.year
+ORDER BY cost DESC;
+```
+Tabela com os custos de produção da empresa dividido por ano:
+
+| year |    cost      |
+|------|--------------|
+| 2018 | 404349866.85 |
+| 2019 | 325532558.11 |
+| 2020 | 140164384.66 |
+| 2017 | 90165084.97  |
+
+Como é informado acima, os anos mais lucrativos (2018, 2019) foram os anos mais custosos para a empresa, enquanto os anos menos lucrativos foram os anos menos custosos, tal insight poderia fornecer hipoteticamente a explicação de que 2020 e 2017 foram os anos menos lucrativos por terem sido os anos que a empresa menos investiu em custos de produção.
 
