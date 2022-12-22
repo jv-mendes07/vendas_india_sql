@@ -160,6 +160,11 @@ Com a query acima, obtive essa tabela abaixo:
 | September | 54968360 |
 
 
+Visivelmente, Janeiro foi o mês de maior faturamento da empresa de aproximadamente 99 milhões de rupees (1 milhão de dólares), enquanto Setembro foi o mês de menor faturamento de 54 milhões de rupees (662 mil dólares), é constatado que os primeiros meses do ano (de Janeiro até Maio) são os meses de maior faturamento da empresa, enquanto da metade do ano em diante, isto é, de Junho até Outubro a empresa apresenta uma queda de faturamento mensal.
+
+
+
+
 
 
 
