@@ -101,7 +101,63 @@ SELECT ROUND(AVG(t.sales_amount), 2) AS 'avg_revenue' FROM transactions AS t;
 ```
 A query acima retornou uma média de 6 mil rupees faturadas por cada venda pela empresa indiana durante esse período de quatro anos (2017-2020), que convertido para o dólar seria 79 dólares em média faturados pela empresa em cada venda.
 
+Após responder tais questões básicas, resolvi aprofundar-me sobre o faturamento da empresa durante cada período anual:
 
+#### (3) Quais foram os anos em que a empresa obteve mais faturamento?
+
+A query abaixo responde essa pergunta acima:
+
+```
+SELECT d.year, SUM(t.sales_amount) AS 'revenue' FROM transactions AS t
+INNER JOIN date AS d 
+ON d.date = t.order_date
+GROUP BY d.year
+ORDER BY revenue DESC;
+```
+
+Como retorno a query acima, obtive essa tabela abaixo:
+
+| year | revenue   |
+|------|-----------|
+| 2018 | 413687163 |
+| 2019 | 336019102 |
+| 2020 | 142224545 |
+| 2017 | 92882653  |
+
+A tabela acima traz o faturamento da empresa em cada ano ordenado decrescentemente do ano de maior faturamento até o ano de menor faturamento.
+
+Visivelmente, 2017 foi o ano de menor faturamento da empresa de 92 milhões de rupees (1 milhão de dólares), enquanto 2018 foi o ano de maior faturamento de 413 milhões de rupees (4 milhões de dólares), e como é observável após 2018 a empresa começou a apresentar uma queda no faturamento em 2019 e em 2020.
+
+Respondida a pergunta relativa ao faturamento anual da empresa, decidi saber quais são os meses de maior ou menor faturamento da empresa:
+
+#### (4) E durante esses anos, quais foram os meses de maior faturamento da empresa?
+
+Query escrita em SQL para responder a pergunta acima:
+
+```
+SELECT d.month_name, SUM(t.sales_amount) AS 'revenue' FROM transactions AS t
+INNER JOIN date AS d
+ON d.date = t.order_date
+GROUP BY d.month_name
+ORDER BY revenue DESC;
+```
+
+Com a query acima, obtive essa tabela abaixo:
+
+| month_name| revenue  |
+|-----------|----------|
+| January   | 99707625 |
+| November  | 92895782 |
+| March     | 92757526 |
+| February  | 89349947 |
+| April     | 88804291 |
+| December  | 84759270 |
+| May       | 83514075 |
+| October   | 80519194 |
+| June      | 74792837 |
+| August    | 71657508 |
+| July      | 71087048 |
+| September | 54968360 |
 
 
 
