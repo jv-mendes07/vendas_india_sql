@@ -23,6 +23,49 @@ O modelo de estrela (star-schema) explicita acima que às 4 tabelas (customers, 
 
 Em suma, a tabela transactions é a tabela-fato por conter todos os registros de todas às vendas realizadas pela empresa durante vários anos, enquanto às de mais tabelas-dimensões são responsáveis por conter informações adicionais que complementam às informações relativa às vendas da empresa.
 
+Concluída a explicação acima sobre a relação entre às tabelas, irei iniciar o processo de análise:
+
+#### Exploração dos dados:
+
+Antes de começar às análises sobre os negócios da empresa, decidi saber de antemão a quantidade de linhas contidas em cada tabela que será analisada:
+
+```
+# Quantidade de linhas na tabela customers:
+
+SELECT COUNT(*) AS 'qtd_rows' FROM customers;
+```
+38 linhas na tabela 'customers'
+
+```
+# Quantidade de linhas na tabela date:
+
+SELECT COUNT(*) AS 'qtd_rows' FROM date;
+```
+1.126 linhas na tabela 'date'
+
+```
+# Quantidade de linhas na tabela markets:
+
+SELECT COUNT(*) AS 'qtd_rows' FROM markets;
+```
+17 linhas na tabela 'markets'
+
+```
+# Quantidade de linhas na tabela products:
+
+SELECT COUNT(*) AS 'qtd_rows' FROM products;
+```
+279 linhas na tabela 'products'
+
+```
+# Quantidade de linhas na tabela transactions:
+
+SELECT COUNT(*) AS 'qtd_rows' FROM transactions;
+```
+148.395 linhas na tabela 'transactions'
+
+Normalmente, a tabela-fato contêm mais linhas do que a tabela-dimensão, nesse caso, por exemplo, a tabela-fato transactions contêm 148 mil linhas, enquanto às de mais tabelas-dimensões contêm pouquíssimas linhas armazenadas.
+
 
 
 
