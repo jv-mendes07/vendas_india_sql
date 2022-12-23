@@ -498,4 +498,6 @@ Como retorno obtive:
 
 O produto mais lucrativo da empresa nesses quatro anos (2017-2020) foi um produto que realizou somente 16 mil vendas em comparação aos produtos mais vendíveis que realizaram até 200 mil vendas e não geraram tanto de lucro assim para a empresa.
 
+Após responder 15 questões, considero que às informações extraídas sobre o conjunto de dados são suficientes para sinalizar quais foram os anos mais lucrativos, quais foram às cidades mais rentáveis e quais foram os produtos mais vendidos pela empresa durante esses quatro anos (2017-2020), além de tal exploração de dados nos informar que 2020 foi o ano que a empresa obteve uma tendência de decréscimo em suas vendas e em seus lucros, em comparação aos anos anteriores que demonstravam um crescimento contínuo nos lucros da empresa.
 
+## ANÁLISE EXPLORATÓRIA FINALIZADA.
