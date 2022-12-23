@@ -297,3 +297,49 @@ Tabela retornada como resultado:
 
 Como expectante, 2018 e 2019 que foram os anos de maior faturamento e de maior lucratividade, também foram os anos de mais vendas acumuladas pela empresa, enquanto 2017 e 2020 que foram os anos de menor faturamento e lucratividade, também foram os anos de menos vendas acumuladas.
 
+Após explorar a tabela de transações (transactions) da empresa, decidi explorar a tabela de mercados para saber como estão os negócios da empresa em cada cidade da Índia que tal empresa é localizada:
+
+#### (9) Quais são as cidades da Índia em que tal empresa é localizada?
+
+Escrevi essa query abaixo para saber quais são às cidades na Índia em que tal empresa é localizada:
+
+```
+SELECT DISTINCT(markets_name) FROM markets
+WHERE markets_name NOT IN ('New York', 'Paris');
+```
+Como retorno, obtive essa tabela abaixo com os nomes das cidades que AtliQ Hardware está presente:
+
+| markets_name |
+|--------------|
+| Chennai      |
+| Mumbai       |
+| Ahmedabad    |
+| Delhi NCR    |
+| Kanpur       |
+| Bengaluru    |
+| Bhopal       |
+| Lucknow      |
+| Patna        |
+| Kochi        |
+| Nagpur       |
+| Surat        |
+| Hyderabad    |
+| Bhubaneshwar |
+
+Com os nomes das cidades indianas obtidos, decidi escrever uma query para obter o número de cidades indianas em que a empresa indiana está localizada:
+
+```
+SELECT COUNT(DISTINCT(markets_name)) AS 'qtd_city' FROM markets
+WHERE markets_name NOT IN ('New York', 'Paris');
+```
+Como retorno obtive:
+
+| qtd_city |
+|----------|
+|    14    |
+
+Em 14 cidades diferentes na Índia há pelo menos uma loja da empresa AtliQ Hardware presente.
+
+
+
+
