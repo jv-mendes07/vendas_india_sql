@@ -340,6 +340,92 @@ Como retorno obtive:
 
 Em 14 cidades diferentes na Índia há pelo menos uma loja da empresa AtliQ Hardware presente.
 
+Após saber quais são às cidades em que a loja AtliQ Hardware está presente, quis saber quais são às 5 cidades em que a empresa obteve maior faturamento e lucratividade:
 
+#### (10) Quais são às 5 cidades da Índia, que tal empresa obteve maior lucratividade e faturamento?
 
+Query escrita em SQL para responder tal questão acima:
+
+```
+SELECT m.markets_name, SUM(t.sales_amount) AS 'revenue', 
+ROUND((SUM(t.sales_amount) - SUM(t.cost_price)), 2) AS 'profit' FROM transactions AS t
+INNER JOIN markets AS m
+ON m.markets_code = t.market_code
+GROUP BY markets_name
+ORDER BY revenue DESC, profit DESC
+LIMIT 5;
+```
+Obtive a tabela abaixo como resposta:
+
+| markets_name |  revenue  |   profit    |
+|--------------|-----------|-------------|
+|  Delhi NCR   | 519514271 | 11898298.52 |
+|  Mumbai      | 150084801 | 4872639.77  |
+|  Ahmedabad   | 132307441 | 2848268.51  |
+|  Bhopal      | 58609861  | 2287149.69  |
+|  Nagpur      | 55026321  | 1412109.72  |
+
+Delhi NCR foi a cidade indiana que trouxe o maior faturamento e os maiores lucros para a empresa, as lojas em tal cidade obtiveram um faturamento de 519 milhões de rupees (6 milhões de dólares) e um lucro de 11 milhões de rupees (143 mil dólares).
+
+Como informação complementar à está questão, quis saber:
+
+#### (11) Quais são às 5 cidades da Índia, que tal empresa obteve menor lucratividade e faturamento?
+
+Escrevi a query abaixo para ter uma resposta à pergunta acima:
+
+```
+SELECT m.markets_name, SUM(t.sales_amount) AS 'revenue', 
+ROUND((SUM(t.sales_amount) - SUM(t.cost_price)), 2) AS 'profit' FROM transactions AS t
+INNER JOIN markets AS m
+ON m.markets_code = t.market_code
+GROUP BY markets_name
+ORDER BY revenue DESC, profit DESC
+LIMIT 5
+OFFSET 10;
+```
+Obtive como retorno:
+
+| Lucknow      | 3094007 | 31161.21  |
+|--------------|---------|-----------|
+| Lucknow      | 3094007 | 31161.21  |
+| Surat        | 2605796 | 126677.05 |
+| Bhubaneshwar | 893857  | 35596.36  |
+| Bengaluru    | 373115  | -77534.96 |
+
+Destacavelmente, Bengaluru foi a única cidade que trouxe prejuízo para a empresa AtliQ Hardware, um prejuízo de aproximadamente 77 mil rupees (936 dólares), enquanto tal cidade obteve o menor faturamento de 373 mil rupees (4 mil dólares) para a empresa.
+
+Respondida essas duas questões, explorei os custos de produção da empresa por cada cidade:
+
+#### (12) Qual foi o custo de produção da empresa em cada cidade?
+
+Query escrita em SQL para responder a pergunta acima:
+
+```
+SELECT m.markets_name, ROUND(SUM(t.cost_price), 2) AS 'cost_of_production'
+FROM transactions AS t
+INNER JOIN markets AS m
+ON m.markets_code = t.market_code
+GROUP BY markets_name
+ORDER BY cost_of_production DESC;
+```
+Obtive como retorno à tabela abaixo:
+
+| markets_name | cost_of_production |
+|--------------|--------------------|
+| Delhi NCR    |    507615972.48    |
+| Mumbai       |    145212161.23    |
+| Ahmedabad    |    129459172.49    |
+| Bhopal       |    56322711.31     |
+| Nagpur       |    53614211.28     |
+| Kochi        |    18110176.01     |
+| Chennai      |    17742129        |
+| Kanpur       |    13648487.45     |
+| Hyderabad    |    7389865.78      |
+| Patna        |    4246132.22      |
+| Lucknow      |    3062845.79      |
+| Surat        |    2479118.95      |
+| Bhubaneshwar |    858260.64       |
+| Bengaluru    |    450649.96       |
+
+Como é notável, às cidades que geram mais lucros e faturamento para a empresa, são às cidades que geram mais custos também, já Bengaluru que é a única cidade que gerou prejuízos para empresa durante todos esses anos, também foi a cidade que teve os menores custos de produção de 450 mil rupees (5 mil dólares).
 
