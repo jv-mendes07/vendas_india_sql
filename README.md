@@ -5,7 +5,7 @@ Neste projeto analítico, viso apresentar em detalhes uma análise exploratória
 
 ![](./images/images.jpg)
 
-O objetivo desta análise exploratória é extrair o máximo de informações valiosas atinentes aos negócios e às vendas da empresa, além de especificamente obter informações estatísticas sobre a tendência de vendas da empresa ao decorrer dos anos, para podermos saber se à demanda pelos produtos da empresa estão em crescimento ou em queda.
+Os objetivo desta análise exploratória são **(1)** extrair o máximo de informações valiosas atinentes aos negócios e às vendas da empresa, e **(2)** obter informações estatísticas sobre a tendência de vendas da empresa ao decorrer dos anos, para podermos saber se à demanda pelos produtos da empresa estão em crescimento ou em queda.
 
 5 tabelas estão disponíveis para a análise neste conjunto de dados:
 
