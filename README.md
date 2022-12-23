@@ -429,3 +429,73 @@ Obtive como retorno à tabela abaixo:
 
 Como é notável, às cidades que geram mais lucros e faturamento para a empresa, são às cidades que geram mais custos também, já Bengaluru que é a única cidade que gerou prejuízos para empresa durante todos esses anos, também foi a cidade que teve os menores custos de produção de 450 mil rupees (5 mil dólares).
 
+Após explorar os dados sobre às vendas nas cidades em que AtliQ está presente, decidi explorar às vendas relativo aos produtos ofertados pela AtliQ Hardware:
+
+#### (13) Quais são os 5 produtos de tal empresa com mais vendas acumuladas?
+
+Query escrita em SQL para trazer tal resposta:
+
+```
+SELECT p.product_code, SUM(t.sales_qty) AS 'sales_qtd' FROM transactions AS t
+INNER JOIN products AS p ON p.product_code = t.product_code
+GROUP BY p.product_code
+ORDER BY sales_qtd DESC
+LIMIT 5;
+```
+Tabela retornada como resposta:
+
+| product_code | sales_qtd |
+|--------------|-----------|
+|   Prod090    |   277959  |
+|   Prod239    |   170458  |
+|   Prod237    |   114170  |
+|   Prod245    |   72935   |
+|   Prod065    |   64077   |
+
+O Prod090 foi um dos produtos mais vendíveis pela empresa durante esses quatro anos (277 mil vendas), mas será que os produtos que mais venderam na empresa, também foram os produtos que geraram mais lucros e faturamento para a empresa?
+
+#### (14) E destes produtos, quais são os 5 produtos que mais geraram lucro para a empresa?
+
+Query escrita em SQL para responder tal questão:
+
+```
+SELECT p.product_code, ROUND(SUM(t.sales_amount) - SUM(t.cost_price), 2) 
+AS 'profit' FROM transactions AS t
+INNER JOIN products AS p ON p.product_code = t.product_code
+GROUP BY p.product_code
+ORDER BY profit DESC
+LIMIT 5;
+```
+Tabela retornada como resposta:
+
+| product_code |   profit   |
+|--------------|------------|
+|   Prod040    | 1025736.71 |
+|   Prod090    | 704548.26  |
+|   Prod049    | 694712.26  |
+|   Prod077    | 602144.01  |
+|   Prod018    | 601367.27  |
+
+Como é vísivel, dos produtos com mais vendas acumuladas, somente um destes que foi classificado como um dos produtos mais lucrativos, ou seja, o Prod090 foi o produto com mais vendas acumuladas que gerou um lucro de 704 mil rupees (8 mil dólares), enquanto o Prod040 que nem foi um dos produtos com mais vendas acumuladas, gerou um lucro de 1 milhão de rupees (12 mil dólares) para a empresa.
+
+No entanto, quantas vendas foram realizadas do produto Prod040 para que este lucro fosse obtido pela AtliQ?
+
+#### (15) Quantas vendas foram realizadas do produto mais lucrativo da empresa?
+
+Query escrita em SQL para responder à pergunta acima:
+
+```
+SELECT p.product_code, SUM(t.sales_qty) AS 'sales_qtd' FROM transactions AS t
+INNER JOIN products AS p ON p.product_code = t.product_code
+GROUP BY p.product_code
+HAVING p.product_code = 'Prod040';
+```
+Como retorno obtive:
+
+| product_code | sales_qtd |
+|--------------|-----------|
+|   Prod040    |   16116   |
+
+O produto mais lucrativo da empresa nesses quatro anos (2017-2020) foi um produto que realizou somente 16 mil vendas em comparação aos produtos mais vendíveis que realizaram até 200 mil vendas e não geraram tanto de lucro assim para a empresa.
+
+
